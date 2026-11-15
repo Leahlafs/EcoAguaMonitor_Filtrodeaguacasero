@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EcoAgua Monitor · Filtro de agua casero</title>
+<style>
+:root{--bg:#eef7fb;--cd:#fff;--tx:#0d2d3f;--mu:#587584;--pr:#0b5d93;--tq:#12b5c1;--gr:#2e9e5b;--sun:#f6cf55;--bd:#d3e6ee;--wn:#fff3d6;--wt:#8a5300;--er:#c0392b;--sh:0 4px 16px rgba(11,93,147,.08);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1923;--cd:#11293a;--tx:#e4f0f6;--mu:#8fb0c0;--pr:#4db4e8;--bd:#244255;--wn:#3a2a10;--wt:#fbbf6a;--sh:none}}
+:root[data-theme="dark"]{--bg:#0a1923;--cd:#11293a;--tx:#e4f0f6;--mu:#8fb0c0;--pr:#4db4e8;--bd:#244255;--wn:#3a2a10;--wt:#fbbf6a;--sh:none}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.app{display:flex;min-height:100vh}
+.sb{width:232px;flex:none;background:linear-gradient(170deg,#06304d,#0b5d93 60%,#0e8a96);color:#fff;padding:16px 10px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.lg{display:flex;gap:8px;align-items:center;padding:4px 8px 2px;font-weight:700;font-size:1.1rem}.lg i{font-style:normal;font-size:1.6rem}
+.sl{font-size:.7rem;opacity:.8;padding:0 8px 12px}
+.sb button{display:flex;gap:8px;width:100%;text-align:left;background:none;border:0;color:#fff;padding:9px 10px;border-radius:10px;font:inherit;font-size:.9rem;cursor:pointer;opacity:.88}
+.sb button:hover{background:#ffffff1a}.sb button.on{background:#ffffff30;opacity:1;font-weight:600}
+main{flex:1;min-width:0;padding:16px;max-width:1040px}
+.tb{display:none}.bk{display:none}
+@media(max-width:800px){.app{display:block}.tb{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20;background:linear-gradient(90deg,#06304d,#0b5d93);color:#fff;padding:10px 14px}.tb button{background:#ffffff26;border:0;color:#fff;font-size:1.3rem;padding:4px 12px;border-radius:8px;cursor:pointer}
+.sb{position:fixed;z-index:30;left:0;top:0;bottom:0;width:270px;max-width:84vw;height:100%;transform:translateX(-105%);transition:transform .25s;padding-top:calc(16px + env(safe-area-inset-top,0px))}.sb.open{transform:none}
+.bk.open{display:block;position:fixed;inset:0;background:#0009;z-index:25}main{padding:12px}input,select,textarea{font-size:16px}.clk{font-size:2.2rem}.hero{padding:16px}h1{font-size:1.3rem}.cd{padding:12px}.gr{grid-template-columns:repeat(2,1fr)}}
+.sim>*,.mt>*{min-width:0}button{touch-action:manipulation}
+
+button,.bt{font:inherit;cursor:pointer;border:1px solid var(--bd);background:var(--cd);color:var(--tx);border-radius:9px;padding:8px 14px}
+button:disabled{opacity:.45;cursor:not-allowed}main button.p{background:var(--pr);border-color:var(--pr);color:#fff;font-weight:600}main button.g{background:var(--gr);border-color:var(--gr);color:#fff}main button.d{color:var(--er)}
+.cd{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:var(--sh)}
+h1{margin:0 0 4px;font-size:1.5rem}h2{margin:0 0 10px;font-size:1.15rem}h3{margin:0 0 6px;font-size:1rem}p{margin:0 0 8px}
+.hero{background:linear-gradient(120deg,#0b5d93,#12b5c1);color:#fff;border-radius:18px;padding:20px;margin-bottom:14px;position:relative;overflow:hidden}
+.hero p{opacity:.92;margin:0}.dr{position:absolute;top:-20px;width:10px;height:14px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:#ffffff66;animation:dd 5s linear infinite}
+@keyframes dd{to{transform:translateY(160px)}}
+.gr{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:14px}
+.k{background:var(--cd);border:1px solid var(--bd);border-radius:16px;padding:12px;box-shadow:var(--sh)}.k em{font-style:normal;font-size:1.3rem}.k b{display:block;font-size:1.3rem;color:var(--pr)}.k span{font-size:.76rem;color:var(--mu)}
+.sec{display:none}.sec.on{display:block;animation:fi .35s}@keyframes fi{from{opacity:0;transform:translateY(6px)}}
+form,.fg{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
+label{display:flex;flex-direction:column;font-size:.8rem;color:var(--mu);gap:3px}
+input,select,textarea{font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:8px;width:100%}
+input[type=checkbox]{width:auto}.f{grid-column:1/-1}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.msg{font-size:.85rem;min-height:1.2em;color:var(--er)}.ok{color:var(--gr)}
+.sc{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:.85rem;min-width:640px}
+th,td{padding:7px 5px;text-align:left;border-bottom:1px solid var(--bd)}th{color:var(--mu);font-size:.75rem}
+.bd{font-size:.66rem;background:var(--sun);color:#533;border-radius:6px;padding:1px 6px;margin-left:4px}
+.nt{background:var(--wn);color:var(--wt);border-radius:12px;padding:10px 12px;font-size:.85rem;margin:0 0 14px}
+.clk{font:700 2.8rem ui-monospace,Menlo,Consolas,monospace;text-align:center;color:var(--pr);margin:4px 0}
+.sim{display:grid;gap:14px;grid-template-columns:1.2fr 1fr}@media(max-width:820px){.sim{grid-template-columns:1fr}}
+svg{max-width:100%;height:auto}svg text{fill:var(--mu);font-size:11px}
+.stp{display:flex;gap:8px;padding:5px 6px;border-radius:8px;cursor:pointer;font-size:.85rem}
+.stp i{flex:none;width:22px;height:22px;border-radius:50%;background:var(--bd);display:grid;place-items:center;font-style:normal;font-size:.75rem}
+.stp.a{background:rgba(18,181,193,.15)}.stp.a i{background:var(--tq);color:#fff}
+[data-min]{opacity:0;transition:opacity .9s}[data-min].on{opacity:1}
+.fl{animation:fl 1.6s linear infinite}@keyframes fl{0%{opacity:0;transform:translateY(0)}20%{opacity:.9}100%{opacity:0;transform:translateY(var(--h,26px))}}
+.dw{animation:dw 1.2s ease-in infinite}@keyframes dw{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(60px)}}
+.bm{stroke-dasharray:6 5;animation:bm .9s linear infinite}@keyframes bm{to{stroke-dashoffset:-22}}
+.ly{cursor:pointer}.ly:hover{stroke:#fff;stroke-width:2}
+#cw{transform-origin:bottom;transform-box:fill-box;transition:transform 4s ease-out}
+#jar{transition:transform 1s}
+.pz *{animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.mt{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.sw{height:58px;border-radius:10px;margin-bottom:8px;display:grid;place-items:center;font-size:1.7rem;border:1px solid var(--bd)}
+details{border-bottom:1px solid var(--bd);padding:8px 0}summary{cursor:pointer;font-weight:600}
+.pb{height:10px;background:var(--bd);border-radius:6px;overflow:hidden}.pb i{display:block;height:100%;background:var(--tq);transition:width .4s}
+.stt{display:inline-block;padding:3px 12px;border-radius:20px;background:var(--tq);color:#fff;font-size:.8rem;font-weight:600}
+.cl{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid var(--bd);align-items:flex-start}.cl input{margin-top:4px}
+.lay{display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:600;color:#fff;text-shadow:0 1px 2px #0008}
+textarea{min-height:90px}
+</style></head><body><div class="app">
+<div class="tb"><button id="mn" aria-label="Abrir menú" aria-expanded="false">☰</button><b>💧 EcoAgua Monitor</b></div><div class="bk" id="bk"></div>
+<aside class="sb" id="sb"><div class="lg"><i>💧</i>EcoAgua Monitor</div><div class="sl">Tecnología que transforma nuestra relación con el agua</div><div id="nav"></div></aside>
+<main>
+<div class="nt" id="ns" style="display:none"><b>Almacenamiento no disponible:</b> este navegador bloquea el guardado local, así que los datos se perderán al recargar. Abre la página en una pestaña normal (no privada) o usa Chrome/Edge/Safari actualizado.</div>
+<section class="sec on" id="v-inicio">
+<div class="hero"><div class="dr" style="left:70%"></div><div class="dr" style="left:82%;animation-delay:-2s"></div><div class="dr" style="left:92%;animation-delay:-3.4s"></div><h1 id="wl">Bienvenido a EcoAgua Monitor</h1><p id="dt"></p><p style="margin-top:6px">Tecnología que transforma nuestra relación con el agua.</p></div>
+<div class="gr" id="dash"></div>
+<div class="sim"><div class="cd"><h2>Nuestro filtro de agua</h2><div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+<div style="width:150px;border:3px solid var(--bd);border-radius:14px 14px 40px 40px;overflow:hidden"><div class="lay" style="height:42px;background:#5b5e66">Piedras</div><div class="lay" style="height:36px;background:#c9a96a">Arena gruesa</div><div class="lay" style="height:40px;background:#6f7178">Carbón</div><div class="lay" style="height:44px;background:#b98a45">Arena fina</div><div class="lay" style="height:14px;background:#e8e6df;color:#444;text-shadow:none">Tela</div></div>
+<div style="flex:1;min-width:150px"><p>Botella plástica invertida con capas que el agua atraviesa por gravedad hasta el recipiente recolector.</p><button class="p" id="go-sim">Ver simulación</button></div></div></div>
+<div class="cd"><h2>Estado del experimento</h2><p><span class="stt" id="est"></span></p><div id="last"></div><button class="p" id="nuevo">Comenzar nuevo experimento</button></div></div>
+</section>
+
+<section class="sec" id="v-sim">
+<h1>Simulación del filtro</h1><p style="color:var(--mu)">Ilustración del recorrido del agua. No predice el rendimiento real del filtro.</p>
+<div class="sim"><div class="cd"><svg id="sv" viewBox="0 0 520 540" role="img" aria-label="Simulación del filtro de agua casero">
+<defs><clipPath id="fn"><path d="M90 120H290V300Q290 330 232 345V372H168V345Q90 330 90 300Z"/></clipPath>
+<pattern id="pst" width="26" height="22" patternUnits="userSpaceOnUse"><rect width="26" height="22" fill="#4a4d55"/><polygon points="2,6 9,1 16,4 14,12 5,13" fill="#7b7e86"/><polygon points="15,14 22,10 26,17 20,22 13,20" fill="#62656d"/><polygon points="3,16 8,14 10,20 4,21" fill="#8a8d94"/></pattern>
+<pattern id="pcs" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#d8bd82"/><circle cx="3" cy="3" r="2.4" fill="#f0e0b4"/><circle cx="8" cy="7" r="2.4" fill="#b99358"/><circle cx="2" cy="8" r="1.6" fill="#e9cf98"/></pattern>
+<pattern id="pfs" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="5" fill="#c99552"/><circle cx="1" cy="1" r=".8" fill="#e0b373"/><circle cx="3.5" cy="3.4" r=".8" fill="#a97a3c"/></pattern></defs>
+<rect width="520" height="540" rx="14" fill="#e3f4fb"/>
+<g id="jar"><path d="M42 30L52 100H128L136 30Z" fill="#fff" fill-opacity=".5" stroke="#6b8794" stroke-width="3"/><path d="M47 62L52 100H128L132 62Z" fill="#a98456"/><circle cx="70" cy="82" r="2.4" fill="#5b4222"/><circle cx="96" cy="76" r="2" fill="#5b4222"/><circle cx="112" cy="88" r="2.6" fill="#5b4222"/></g>
+<path data-min="1" class="bm" d="M134 36Q172 60 198 122" stroke="#a98456" stroke-width="6" fill="none"/>
+<g clip-path="url(#fn)">
+<rect x="90" y="120" width="200" height="220" fill="#f4fbff"/>
+<rect class="ly" data-l="1" x="90" y="125" width="200" height="60" fill="url(#pst)"/>
+<rect class="ly" data-l="2" x="90" y="185" width="200" height="50" fill="url(#pcs)"/>
+<rect class="ly" data-l="3" x="90" y="235" width="200" height="50" fill="#74777e"/><path d="M96 240Q120 232 146 240T198 240T250 240T286 238V252H96Z" fill="#eceae6"/><rect x="104" y="255" width="172" height="26" fill="#2d2f33" opacity=".55"/>
+<rect class="ly" data-l="5" x="90" y="285" width="200" height="60" fill="url(#pfs)"/>
+<rect data-min="2" x="90" y="125" width="200" height="60" fill="#8a6a3a" opacity=".38"/><rect data-min="3" x="90" y="185" width="200" height="50" fill="#8a6a3a" opacity=".28"/><rect data-min="4" x="90" y="235" width="200" height="50" fill="#6a8f94" opacity=".25"/><rect data-min="5" x="90" y="285" width="200" height="60" fill="#9cc9dc" opacity=".25"/>
+<g data-min="2" fill="#3a2a12"><circle cx="120" cy="140" r="5"/><circle cx="165" cy="150" r="4.5"/><circle cx="215" cy="138" r="5"/><circle cx="255" cy="152" r="4"/><circle cx="190" cy="168" r="4"/></g>
+<g data-min="3" fill="#4a3a1a"><circle cx="110" cy="200" r="2.6"/><circle cx="150" cy="212" r="2.6"/><circle cx="195" cy="198" r="2.6"/><circle cx="240" cy="214" r="2.6"/><circle cx="270" cy="200" r="2.6"/><circle cx="175" cy="226" r="2.6"/></g>
+<g data-min="4" fill="#9fe6a8"><circle cx="130" cy="262" r="1.8"/><circle cx="170" cy="272" r="1.8"/><circle cx="215" cy="262" r="1.8"/><circle cx="255" cy="270" r="1.8"/></g>
+<g data-min="5" fill="#5a4326"><circle cx="125" cy="298" r="1.3"/><circle cx="160" cy="306" r="1.3"/><circle cx="200" cy="296" r="1.3"/><circle cx="240" cy="308" r="1.3"/><circle cx="185" cy="318" r="1.3"/></g>
+<g data-min="2" fill="#9a7a45"><circle class="fl" cx="140" cy="150" r="2.5" style="--h:30px"/><circle class="fl" cx="200" cy="145" r="2.5" style="--h:30px;animation-delay:-.7s"/><circle class="fl" cx="250" cy="150" r="2.5" style="--h:30px;animation-delay:-1.2s"/></g>
+<g data-min="3" fill="#a88b58"><circle class="fl" cx="130" cy="195" r="2" style="--h:36px;animation-delay:-.3s"/><circle class="fl" cx="215" cy="200" r="2" style="--h:36px;animation-delay:-.9s"/></g>
+<g data-min="4" fill="#9ab8c0"><circle class="fl" cx="150" cy="245" r="2" style="--h:36px;animation-delay:-.5s"/><circle class="fl" cx="230" cy="248" r="2" style="--h:36px;animation-delay:-1.1s"/></g>
+<g data-min="5" fill="#a9d4e6"><circle class="fl" cx="200" cy="298" r="2" style="--h:38px;animation-delay:-.4s"/></g>
+<rect class="ly" data-l="6" x="164" y="344" width="72" height="16" fill="#efede8" stroke="#bbb"/>
+</g>
+<path class="ly" data-l="0" d="M90 120H290V300Q290 330 232 345V372H168V345Q90 330 90 300Z" fill="#ffffff" fill-opacity=".08" stroke="#6b8794" stroke-width="3"/>
+<circle data-min="6" class="dw" cx="200" cy="376" r="3.5" fill="#7fd0ee"/><circle data-min="6" class="dw" cx="200" cy="376" r="3.5" fill="#7fd0ee" style="animation-delay:-.6s"/>
+<path class="ly" data-l="7" d="M80 392H300V500Q300 515 285 515H95Q80 515 80 500Z" fill="#ffffff" fill-opacity=".1" stroke="#6b8794" stroke-width="3"/>
+<rect id="cw" data-min="7" x="83" y="440" width="214" height="72" fill="#8fdcf2" opacity=".85" style="transform:scaleY(.05)"/>
+<g id="labs"><g stroke="#6b8794"><path d="M292 155h14M292 210h14M292 260h14M292 315h14M240 352h66M300 470h6"/></g>
+<text x="310" y="159">Piedras</text><text x="310" y="214">Arena gruesa</text><text x="310" y="250">Carbón activado</text><text x="310" y="264">molido en tela fina</text><text x="310" y="319">Arena fina</text><text x="310" y="356">Tela de salida</text><text x="310" y="474">Agua filtrada</text><text x="20" y="125">Agua con impurezas</text><text x="304" y="136">Parte superior de la botella</text><text x="304" y="420">Parte inferior</text><text x="304" y="434">(recipiente recolector)</text></g>
+</svg>
+<div class="row" style="margin-top:8px"><button class="p" id="b-st">▶ Iniciar</button><button id="b-pa">⏸ Pausar</button><button id="b-co">⏯ Continuar</button><button id="b-re">↺ Reiniciar</button><button id="b-pr">◀ Atrás</button><button id="b-nx">Siguiente ▶</button><label style="flex-direction:row;align-items:center;gap:5px"><input type="checkbox" id="lb" checked>Etiquetas</label></div></div>
+<div><div class="cd"><h3 id="s-t"></h3><p id="s-d"></p><div id="steps"></div></div><div class="cd" id="mi"><p style="color:var(--mu);margin:0">Toca una capa del filtro para ver su función y características.</p></div></div></div>
+<div class="nt"><b>Advertencia científica:</b> que el agua salga más clara no demuestra que sea potable. Puede contener microorganismos y contaminantes disueltos.</div>
+</section>
+
+<section class="sec" id="v-crono">
+<h1>Cronómetro de filtración</h1>
+<div class="cd"><div class="clk" id="clk">00:00:00</div>
+<div class="row" style="justify-content:center"><button class="p" id="c-st">▶ Iniciar</button><button id="c-pa">⏸ Pausar</button><button id="c-co">⏯ Continuar</button><button class="g" id="c-fi">■ Finalizar</button><button id="c-rs">↺ Reiniciar</button></div>
+<p id="c-in" style="text-align:center;color:var(--mu);font-size:.85rem;margin-top:8px"></p>
+<p style="text-align:center;color:var(--mu);font-size:.78rem;margin:0">Calcula el tiempo con marcas de tiempo reales: se conserva al cambiar de módulo o recargar la página.</p></div>
+<div class="cd"><h2>Tiempo para recolectar un volumen</h2><p style="color:var(--mu);font-size:.85rem">Mientras el cronómetro corre, escribe cuántos ml hay en el recipiente y marca el tiempo.</p>
+<div class="row"><input type="number" id="lm" min="1" step="any" placeholder="ml recolectados" style="width:170px"><button id="lp" class="p">Marcar tiempo</button></div><div id="lps" style="margin-top:8px"></div></div>
+<div class="cd"><h2>Qué mide cada dato</h2><ul style="margin:0;padding-left:20px"><li><b>Tiempo total del experimento:</b> desde iniciar hasta finalizar.</li><li><b>Tiempo de filtración:</b> lo que tarda en pasar una cantidad determinada (marcas de arriba).</li><li><b>Caudal:</b> ml recolectados ÷ minutos.</li></ul><p style="margin:8px 0 0;color:var(--mu);font-size:.85rem">No existe un tiempo fijo para los filtros caseros. Depende de: cantidad de agua, granulometría de la arena, cantidad y compactación de los materiales, altura de las capas, obstrucción, partículas presentes, diseño de la salida y altura de agua sobre el material.</p></div>
+</section>
+
+<section class="sec" id="v-nuevo">
+<div class="cd"><h2 id="f-h">Nuevo experimento</h2>
+<form id="f" autocomplete="off" novalidate>
+<label>Nombre del experimento *<input id="nom" maxlength="60"></label>
+<label>Código de identificación *<input id="cod" maxlength="20"></label>
+<label>Fecha *<input type="date" id="fec"></label>
+<label>Hora de inicio<input type="time" id="hi"></label>
+<label>Hora de finalización<input type="time" id="hf"></label>
+<label>Volumen inicial (ml) *<input type="number" id="ini" min="0" step="any"></label>
+<label>Volumen filtrado (ml) *<input type="number" id="fil" min="0" step="any"></label>
+<label>Tiempo de filtración (min) *<input type="number" id="mn" min="0" step="any"></label>
+<label>Tipo de agua utilizada<select id="tp"><option>Agua turbia preparada (demostración)</option><option>Agua de lluvia</option><option>Agua de río o charco</option><option>Otra</option></select></label>
+<label>Apariencia inicial<select id="ai"><option value="">No registrada</option><option>Transparente</option><option>Ligeramente turbia</option><option>Turbia</option><option>Muy turbia</option></select></label>
+<label>Apariencia final<select id="af"><option value="">No registrada</option><option>Transparente</option><option>Ligeramente turbia</option><option>Turbia</option><option>Muy turbia</option></select></label>
+<label>Turbidez inicial (NTU, opcional)<input type="number" id="ni" min="0" step="any"></label>
+<label>Turbidez final (NTU, opcional)<input type="number" id="nf" min="0" step="any"></label>
+<label>Estado del filtro<select id="ef"><option>Nuevo</option><option>En uso</option><option>Obstruido</option><option>Reemplazado</option></select></label>
+<label class="f">Observaciones<input id="obs" maxlength="200"></label>
+<div class="f cd" id="lv" style="margin:0;background:var(--bg)"></div>
+<div class="msg f" id="msg" role="alert"></div>
+<div class="row f"><button class="p" type="submit" id="f-ok">Guardar experimento</button><button type="button" id="f-ca" style="display:none">Cancelar edición</button></div></form></div>
+</section>
+
+<section class="sec" id="v-hist">
+<h1>Historial</h1>
+<div class="cd"><div class="fg" style="margin-bottom:10px"><label>Buscar por código o nombre<input id="q" type="search"></label><label>Desde<input type="date" id="d1"></label><label>Hasta<input type="date" id="d2"></label>
+<label>Ordenar por<select id="so"><option value="fd">Fecha (reciente primero)</option><option value="fa">Fecha (antigua primero)</option><option value="ca">Mayor caudal</option><option value="re">Mayor recuperación</option><option value="vo">Mayor volumen filtrado</option><option value="ti">Menor tiempo</option></select></label></div>
+<div class="sc" id="tb"></div>
+<div class="row" style="margin-top:10px"><button id="csv">Exportar CSV</button></div><div id="csvbox"></div></div>
+<div id="det"></div>
+</section>
+
+<section class="sec" id="v-est"><h1>Estadísticas</h1>
+<div class="cd"><div class="fg"><label>Desde<input type="date" id="e1"></label><label>Hasta<input type="date" id="e2"></label></div><div class="row" id="chips" style="margin-top:8px"></div></div>
+<div id="an"></div></section>
+
+<section class="sec" id="v-mat"><h1>Conoce los materiales</h1><div class="mt" id="mts"></div>
+<div class="cd" style="margin-top:14px"><h2>Recursos utilizados y sostenibilidad</h2><div class="fg" id="rec"></div><p style="margin:10px 0 0">El proyecto promueve reutilizar botellas y telas, aprovechar materiales naturales y aprender a medir y registrar datos para tomar decisiones con evidencia.</p></div></section>
+
+<section class="sec" id="v-edu"><h1>Aprende cómo funciona</h1><div class="cd" id="edu"></div>
+<div class="cd"><h2>Paso a paso: el recorrido del agua</h2><ol id="ps" style="margin:0;padding-left:20px"></ol></div></section>
+
+<section class="sec" id="v-prot"><h1>Protocolo experimental</h1><div class="cd"><div class="pb"><i id="pbi"></i></div><p id="pbt" style="font-size:.85rem;color:var(--mu);margin:6px 0"></p><div id="cks"></div><button id="ckr" style="margin-top:10px">Reiniciar lista</button></div></section>
+
+<section class="sec" id="v-seg"><h1>Seguridad y recomendaciones</h1><div class="nt" style="font-size:.95rem"><b>No bebas el agua obtenida en la demostración.</b></div><div class="cd" id="sg"></div></section>
+
+<section class="sec" id="v-cfg"><h1>Configuración</h1>
+<div class="cd"><h2>Perfil</h2><label style="max-width:320px">Tu nombre (para la bienvenida)<input id="un" maxlength="40"></label></div>
+<div class="cd"><h2>Datos</h2><p style="color:var(--mu);font-size:.85rem">Se guardan en el almacenamiento local de este navegador. No hay base de datos en línea conectada.</p><div class="row"><button id="rd">Eliminar datos de demostración</button><button id="ra" class="d">Borrar todos los datos</button></div><div class="msg ok" id="cm"></div></div></section>
+</main></div>
+<script>
+var KEY="ecoagua3",S={exps:[],seeded:false,un:"",reg:false,ck:{},tm:{st:"idle",acc:0,seg:0,t0:0,te:0,laps:[]}};
+var $=function(i){return document.getElementById(i)};
+function ld(){try{var r=JSON.parse(localStorage.getItem(KEY)||"null");if(r&&r.exps)S=r}catch(e){}
+ if(!S.seeded){S.seeded=true;S.exps=[
+ {id:1,demo:1,nom:"Demo A",cod:"DEMO-01",fec:"2026-11-08",hi:"",hf:"",ini:500,fil:380,mn:12,tp:"Agua turbia preparada (demostración)",ai:"Turbia",af:"Ligeramente turbia",ni:"",nf:"",ef:"Nuevo",obs:"Dato de demostración"},
+ {id:2,demo:1,nom:"Demo B",cod:"DEMO-02",fec:"2026-11-10",hi:"",hf:"",ini:500,fil:410,mn:9,tp:"Agua turbia preparada (demostración)",ai:"Muy turbia",af:"Transparente",ni:"",nf:"",ef:"En uso",obs:"Dato de demostración"},
+ {id:3,demo:1,nom:"Demo C",cod:"DEMO-03",fec:"2026-11-12",hi:"",hf:"",ini:1000,fil:760,mn:21,tp:"Agua turbia preparada (demostración)",ai:"Turbia",af:"Ligeramente turbia",ni:"",nf:"",ef:"En uso",obs:"Dato de demostración"}];sv()}}
+function sv(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){var n=$("ns");if(n)n.style.display=""}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function f1(n){return Number(n).toLocaleString("es-DO",{maximumFractionDigits:1})}
+function fd(s){if(!s)return"—";var p=s.split("-");return p[2]+"/"+p[1]+"/"+p[0]}
+function p2(n){return String(n).padStart(2,"0")}
+function hm(ms){var s=Math.floor(ms/1000);return p2(Math.floor(s/3600))+":"+p2(Math.floor(s%3600/60))+":"+p2(s%60)}
+function dstr(t){var d=new Date(t);return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())}
+function tstr(t){var d=new Date(t);return p2(d.getHours())+":"+p2(d.getMinutes())}
+function num(v){return v===""||v==null?NaN:parseFloat(v)}
+function ca(t){return t.mn>0?t.fil/t.mn:NaN}function rc(t){return t.ini>0?t.fil/t.ini*100:NaN}
+function tu(t){var a=num(t.ni),b=num(t.nf);return a>0&&b>=0?(a-b)/a*100:NaN}
+function srt(){return S.exps.slice().sort(function(a,b){return a.fec<b.fec?-1:a.fec>b.fec?1:a.id-b.id})}
+function av(a,f){var v=a.map(f).filter(function(x){return !isNaN(x)});return v.length?v.reduce(function(x,y){return x+y},0)/v.length:NaN}
+function fx(n,u){return isNaN(n)?"—":f1(n)+(u||"")}
+/* navegación */
+var V=[["inicio","🏠 Inicio"],["sim","🧪 Simulación del filtro"],["crono","⏱️ Cronómetro"],["nuevo","📝 Nuevo experimento"],["hist","📚 Historial"],["est","📊 Estadísticas"],["mat","🪨 Materiales"],["edu","🎓 Aprende cómo funciona"],["prot","✅ Protocolo experimental"],["seg","⚠️ Seguridad"],["cfg","⚙️ Configuración"]];
+$("nav").innerHTML=V.map(function(x){return'<button data-v="'+x[0]+'">'+x[1]+"</button>"}).join("");
+function go(v){if(!$("v-"+v))v="inicio";S.view=v;sv();if(location.hash.slice(1)!==v){try{location.hash=v}catch(e){}}closeM();V.forEach(function(x){$("v-"+x[0]).classList.toggle("on",x[0]===v);$("nav").querySelector('[data-v="'+x[0]+'"]').classList.toggle("on",x[0]===v)});if(v==="est")ana();if(v==="hist")tb();window.scrollTo(0,0)}
+function closeM(){$("sb").classList.remove("open");$("bk").classList.remove("open");$("mn").setAttribute("aria-expanded","false")}
+$("mn").onclick=function(){var o=!$("sb").classList.contains("open");$("sb").classList.toggle("open",o);$("bk").classList.toggle("open",o);$("mn").setAttribute("aria-expanded",o)};
+$("bk").onclick=closeM;document.addEventListener("keydown",function(e){if(e.key==="Escape")closeM()});
+window.addEventListener("hashchange",function(){var h=location.hash.slice(1);if(h&&$("v-"+h)&&!$("v-"+h).classList.contains("on"))go(h)});
+$("nav").onclick=function(e){var v=e.target.closest("button");if(v)go(v.getAttribute("data-v"))};
+$("go-sim").onclick=function(){go("sim")};$("nuevo").onclick=function(){go("crono")};
+/* cronómetro con marcas de tiempo */
+function el(){var t=S.tm;return t.acc+(t.st==="run"?Date.now()-t.seg:0)}
+function tmUI(){var t=S.tm,s=t.st;$("c-st").disabled=s!=="idle";$("c-pa").disabled=s!=="run";$("c-co").disabled=s!=="pause";$("c-fi").disabled=!(s==="run"||s==="pause");$("c-rs").disabled=s==="idle";$("lp").disabled=!(s==="run"||s==="pause");
+ $("c-in").textContent=t.t0?("Fecha: "+fd(dstr(t.t0))+" · Inicio: "+tstr(t.t0)+(t.te?" · Fin: "+tstr(t.te):"")):"Sin experimento en curso.";
+ $("lps").innerHTML=(t.laps||[]).map(function(l){var m=l.ms/60000;return"<div>• <b>"+f1(l.ml)+" ml</b> en "+hm(l.ms)+" → "+f1(l.ml/m)+" ml/min</div>"}).join("")}
+function tick(){var h=hm(el());$("clk").textContent=h;var d=$("dk");if(d)d.textContent=h}
+function R0(){return{st:"idle",acc:0,seg:0,t0:0,te:0,laps:[]}}
+$("c-st").onclick=function(){S.tm={st:"run",acc:0,seg:Date.now(),t0:Date.now(),te:0,laps:[]};S.reg=false;sv();tmUI();dash()};
+$("c-pa").onclick=function(){S.tm.acc=el();S.tm.st="pause";sv();tmUI();dash()};
+$("c-co").onclick=function(){S.tm.seg=Date.now();S.tm.st="run";sv();tmUI();dash()};
+$("c-rs").onclick=function(){S.tm=R0();sv();tmUI();tick();dash()};
+$("lp").onclick=function(){var v=num($("lm").value);if(!(v>0))return;S.tm.laps.push({ml:v,ms:el()});$("lm").value="";sv();tmUI()};
+$("c-fi").onclick=function(){var t=S.tm;t.acc=el();t.te=Date.now();t.st="done";sv();tmUI();dash();
+ clr();var l=t.laps&&t.laps.length?t.laps[t.laps.length-1]:null;$("fec").value=dstr(t.t0);$("hi").value=tstr(t.t0);$("hf").value=tstr(t.te);$("mn").value=((l?l.ms:t.acc)/60000).toFixed(2);if(l)$("fil").value=l.ml;lv();go("nuevo")};
+/* simulación */
+var MT=[["Botella plástica","🧴","linear-gradient(135deg,#cfeefa,#9fd8ee)","Sirve como estructura del filtro y contiene las capas de materiales.","Material reutilizable o reciclado. Debe estar limpia y cortada con cuidado."],
+["Piedras","🪨","repeating-linear-gradient(45deg,#5b5e66,#7b7e86 8px,#4a4d55 16px)","Primera capa: ayuda a retener residuos grandes y distribuye el flujo del agua.","Lávalas antes de usarlas para quitar polvo y residuos."],
+["Arena gruesa","🟤","radial-gradient(#f0e0b4 20%,#d8bd82 21%) 0 0/10px 10px","Contribuye a retener partículas suspendidas de mayor tamaño: etapa de filtración física.","Lavar hasta que el agua de lavado salga clara. Evitar compactarla en exceso."],
+["Carbón activado","⚫","linear-gradient(135deg,#2d2f33,#74777e)","Su superficie porosa adsorbe ciertos compuestos y ayuda a reducir algunos olores, sabores y sustancias orgánicas.","Debe ser carbón activado apropiado para filtración de agua, no carbón común de parrilla. No elimina todos los contaminantes."],
+["Tela fina","🧵","linear-gradient(135deg,#eceae6,#c9c6bf)","Contiene el carbón activado y evita que sus partículas se mezclen con las demás capas.","Tela limpia, de trama cerrada, bien atada."],
+["Arena fina","🟡","radial-gradient(#e0b373 20%,#c99552 21%) 0 0/5px 5px","Retiene partículas suspendidas más pequeñas que las de las capas superiores.","Lavarla muy bien; es la capa que más se obstruye con el uso."],
+["Tela de salida","🧻","linear-gradient(135deg,#f3f1ec,#d8d5ce)","Mantiene los materiales dentro del filtro y evita que salgan por el cuello de la botella.","Debe ajustar bien al cuello y reemplazarse si se ensucia."],
+["Recipiente recolector","🥛","linear-gradient(135deg,#d6f1fb,#8fdcf2)","Recibe el agua que atraviesa el filtro y permite medir el volumen obtenido.","Usar un recipiente limpio y graduado (ml) para medir con precisión."]];
+var ST=[["Agua con impurezas","El agua turbia contiene partículas en suspensión y está lista para verterse."],["Se vierte lentamente","El agua se vierte por la parte superior y desciende por gravedad."],["Piedras","El agua pasa entre las piedras, que retienen residuos grandes y reparten el flujo."],["Arena gruesa","Se retienen partículas suspendidas de mayor tamaño (filtración física)."],["Carbón activado en tela fina","El agua contacta el carbón: adsorbe algunos olores, sabores y compuestos orgánicos. La tela mantiene el carbón en su lugar."],["Arena fina","Se retienen partículas suspendidas más pequeñas."],["Salida por la tela","La tela evita que los materiales salgan por el cuello de la botella."],["Recolección","El agua se acumula en el recipiente inferior, más clara. Aun así, no es potable: la filtración no equivale a desinfección."]];
+var sg=0,pl=false,pz=false,tr=null;
+function simUI(){[].forEach.call($("sv").querySelectorAll("[data-min]"),function(e){e.classList.toggle("on",sg>=+e.getAttribute("data-min"))});
+ $("cw").style.transform="scaleY("+(sg>=7?1:.05)+")";$("jar").style.transform=sg>=1?"rotate(38deg)":"none";$("jar").style.transformOrigin="136px 34px";
+ $("s-t").textContent=(sg+1)+". "+ST[sg][0];$("s-d").textContent=ST[sg][1];
+ $("steps").innerHTML=ST.map(function(x,i){return'<div class="stp'+(i===sg?" a":"")+'" data-i="'+i+'"><i>'+(i+1)+"</i><span>"+x[0]+"</span></div>"}).join("");
+ $("sv").classList.toggle("pz",pz);$("labs").style.display=$("lb").checked?"":"none";
+ $("b-st").disabled=pl||pz;$("b-pa").disabled=!pl;$("b-co").disabled=!pz;$("b-pr").disabled=sg===0;$("b-nx").disabled=sg===7}
+function auto(){clearInterval(tr);tr=setInterval(function(){if(sg<7){sg++;simUI()}else{pl=false;clearInterval(tr);simUI()}},3600)}
+function man(){pl=false;pz=true;clearInterval(tr)}
+$("b-st").onclick=function(){sg=0;pl=true;pz=false;auto();simUI()};
+$("b-pa").onclick=function(){man();simUI()};
+$("b-co").onclick=function(){pl=true;pz=false;if(sg>=7)sg=0;auto();simUI()};
+$("b-re").onclick=function(){sg=0;pl=false;pz=false;clearInterval(tr);simUI()};
+$("b-pr").onclick=function(){if(sg>0)sg--;man();simUI()};$("b-nx").onclick=function(){if(sg<7)sg++;man();simUI()};
+$("lb").onchange=simUI;
+$("steps").onclick=function(e){var s=e.target.closest(".stp");if(s){sg=+s.getAttribute("data-i");man();simUI()}};
+$("sv").onclick=function(e){var l=e.target.getAttribute("data-l");if(l===null)return;var m=MT[+l];$("mi").innerHTML="<h3>"+m[1]+" "+m[0]+"</h3><p><b>Función:</b> "+m[3]+"</p><p style='margin:0'><b>Características:</b> "+m[4]+"</p>"};
+/* panel */
+function dash(){var s=srt(),l=s[s.length-1],n=S.exps.length,t=S.tm.st;
+ var es=t==="run"||t==="pause"?"En proceso":t==="done"?"Finalizado":S.reg?"Registrado":"Sin iniciar";$("est").textContent=es;
+ var d=new Date();$("dt").textContent=d.toLocaleDateString("es-DO",{weekday:"long",day:"numeric",month:"long",year:"numeric"});$("wl").textContent="Bienvenido"+(S.un?", "+S.un:"")+" a EcoAgua Monitor";
+ $("dash").innerHTML=[["🧪",n,"Experimentos registrados"],["💧",l?f1(l.ini)+" ml":"—","Volumen inicial (última)"],["🚰",l?f1(l.fil)+" ml":"—","Volumen filtrado (última)"],["⏱️",fx(av(S.exps,function(x){return x.mn})," min"),"Tiempo promedio de filtración"],["🌊",fx(av(S.exps,ca)," ml/min"),"Caudal promedio"],["⏲️",'<span id="dk">'+hm(el())+"</span>","Cronómetro actual"]].map(function(x){return'<div class="k"><em>'+x[0]+"</em><b>"+x[1]+"</b><span>"+x[2]+"</span></div>"}).join("");
+ $("last").innerHTML=l?"<p><b>Última prueba:</b> "+esc(l.nom)+" ("+esc(l.cod)+")"+(l.demo?'<span class="bd">Demo</span>':"")+"<br>"+fd(l.fec)+" · "+f1(l.fil)+" de "+f1(l.ini)+" ml · caudal "+fx(ca(l)," ml/min")+" · recuperación "+fx(rc(l),"%")+"</p>":"<p>Aún no hay experimentos.</p>"}
+/* formulario */
+var ed=null,ov=false;
+function codeNext(){return"EXP-"+p2(S.exps.length+1)}
+function clr(){ed=null;ov=false;$("f").reset();$("f-h").textContent="Nuevo experimento";$("f-ok").textContent="Guardar experimento";$("f-ca").style.display="none";$("msg").textContent="";$("fec").value=dstr(Date.now());$("cod").value=codeNext();lv()}
+function lv(){var t={ini:num($("ini").value),fil:num($("fil").value),mn:num($("mn").value),ni:$("ni").value,nf:$("nf").value};
+ $("lv").innerHTML="<b>Resultados automáticos</b><div class='fg' style='margin-top:6px'><span>Caudal: <b>"+fx(ca(t)," ml/min")+"</b></span><span>Recuperación: <b>"+fx(rc(t),"%")+"</b></span><span>Volumen no recuperado: <b>"+(isNaN(t.ini)||isNaN(t.fil)?"—":f1(t.ini-t.fil)+" ml")+"</b></span><span>Eliminación aparente de turbidez: <b>"+fx(tu(t),"%")+"</b></span></div><small style='color:var(--mu)'>La recuperación es de volumen, no eficiencia de eliminación de contaminantes. La turbidez solo se calcula con mediciones en NTU.</small>"}
+$("f").oninput=function(){ov=false;lv()};
+$("f-ca").onclick=clr;
+$("f").onsubmit=function(e){e.preventDefault();var er=[],g=function(i){return $(i).value},ini=num(g("ini")),fil=num(g("fil")),mn=num(g("mn")),ni=num(g("ni")),nf=num(g("nf"));
+ if(!g("nom").trim())er.push("Falta el nombre.");if(!g("cod").trim())er.push("Falta el código.");
+ else if(S.exps.some(function(x){return x.cod.toLowerCase()===g("cod").trim().toLowerCase()&&x.id!==ed}))er.push("Ese código ya existe.");
+ var fe=new Date(g("fec")+"T00:00");if(!g("fec")||isNaN(fe)||fe.getFullYear()<2000||fe>new Date())er.push("La fecha no es válida o es futura.");
+ if(isNaN(ini)||ini<=0)er.push("El volumen inicial debe ser mayor que 0.");if(isNaN(fil)||fil<0)er.push("El volumen filtrado no es válido (no puede ser negativo ni vacío).");
+ if(isNaN(mn)||mn<=0)er.push("El tiempo debe ser mayor que 0 para calcular el caudal.");
+ if(g("ni")!==""&&ni<0)er.push("La turbidez inicial no puede ser negativa.");if(g("nf")!==""&&nf<0)er.push("La turbidez final no puede ser negativa.");
+ if(er.length){$("msg").className="msg f";$("msg").textContent=er.join(" ");return}
+ if(fil>ini&&!ov){ov=true;$("msg").className="msg f";$("msg").textContent="Advertencia: el volumen filtrado supera al inicial. Si es correcto, pulsa Guardar otra vez.";return}
+ var o={id:ed||Date.now(),nom:g("nom").trim(),cod:g("cod").trim(),fec:g("fec"),hi:g("hi"),hf:g("hf"),ini:ini,fil:fil,mn:mn,tp:g("tp"),ai:g("ai"),af:g("af"),ni:g("ni"),nf:g("nf"),ef:g("ef"),obs:g("obs").trim()};
+ if(ed){var i=S.exps.findIndex(function(x){return x.id===ed});o.demo=S.exps[i].demo;S.exps[i]=o}else{S.exps.push(o);if(S.tm.st==="done"){S.tm=R0();tmUI();tick()}}
+ S.reg=true;sv();var m="Guardado ✓ · Caudal "+fx(ca(o)," ml/min")+" · Recuperación "+fx(rc(o),"%");clr();$("msg").className="msg ok f";$("msg").textContent=m;dash()};
+/* historial */
+var ar={};
+function tb(){var q=$("q").value.trim().toLowerCase(),a=$("d1").value,b=$("d2").value,so=$("so").value,
+ s=S.exps.filter(function(t){return(!q||t.cod.toLowerCase().indexOf(q)>=0||t.nom.toLowerCase().indexOf(q)>=0)&&(!a||t.fec>=a)&&(!b||t.fec<=b)});
+ var K={fd:function(x,y){return x.fec<y.fec?1:-1},fa:function(x,y){return x.fec<y.fec?-1:1},ca:function(x,y){return ca(y)-ca(x)},re:function(x,y){return rc(y)-rc(x)},vo:function(x,y){return y.fil-x.fil},ti:function(x,y){return x.mn-y.mn}};s.sort(K[so]);
+ if(!s.length){$("tb").innerHTML='<p style="text-align:center;color:var(--mu)">Sin resultados.</p>';return}
+ $("tb").innerHTML="<table><thead><tr><th>Código</th><th>Fecha</th><th>Inicial</th><th>Filtrado</th><th>Tiempo</th><th>Caudal</th><th>Recup.</th><th></th></tr></thead><tbody>"+s.map(function(t){return"<tr><td><b>"+esc(t.cod)+"</b>"+(t.demo?'<span class="bd">Demo</span>':"")+"</td><td>"+fd(t.fec)+"</td><td>"+f1(t.ini)+" ml</td><td>"+f1(t.fil)+" ml</td><td>"+f1(t.mn)+" min</td><td>"+fx(ca(t)," ml/min")+"</td><td>"+fx(rc(t),"%")+'</td><td><button data-v="'+t.id+'">Ver</button> <button data-e="'+t.id+'">Editar</button> <button class="d" data-x="'+t.id+'">Eliminar</button></td></tr>'}).join("")+"</tbody></table>"}
+["q","d1","d2","so"].forEach(function(i){$(i).oninput=tb;$(i).onchange=tb});
+function byId(i){return S.exps.find(function(z){return String(z.id)===i})}
+$("tb").onclick=function(e){var b=e.target,v=b.getAttribute("data-v"),d=b.getAttribute("data-e"),x=b.getAttribute("data-x");
+ if(v){var t=byId(v);$("det").innerHTML='<div class="cd"><h2>Ficha: '+esc(t.nom)+" ("+esc(t.cod)+")"+(t.demo?'<span class="bd">Demo</span>':"")+'</h2><div class="fg">'+[["Fecha",fd(t.fec)],["Horario",(t.hi||"—")+" a "+(t.hf||"—")],["Volumen inicial",f1(t.ini)+" ml"],["Volumen filtrado",f1(t.fil)+" ml"],["Tiempo de filtración",f1(t.mn)+" min"],["Caudal",fx(ca(t)," ml/min")],["Recuperación",fx(rc(t),"%")],["Volumen no recuperado",f1(t.ini-t.fil)+" ml"],["Eliminación aparente de turbidez",fx(tu(t),"%")],["Turbidez inicial / final",(t.ni===""?"—":t.ni)+" / "+(t.nf===""?"—":t.nf)+" NTU"],["Tipo de agua",t.tp],["Apariencia inicial → final",(t.ai||"—")+" → "+(t.af||"—")],["Estado del filtro",t.ef],["Observaciones",t.obs||"—"]].map(function(r){return"<div><small style='color:var(--mu)'>"+r[0]+"</small><br><b>"+esc(r[1])+"</b></div>"}).join("")+"</div></div>";$("det").scrollIntoView({behavior:"smooth"})}
+ if(d){var t2=byId(d);ed=t2.id;ov=false;["nom","cod","fec","hi","hf","ini","fil","mn","tp","ai","af","ni","nf","ef","obs"].forEach(function(k){$(k).value=t2[k]});$("f-h").textContent="Editar experimento";$("f-ok").textContent="Actualizar";$("f-ca").style.display="";lv();go("nuevo")}
+ if(x){if(ar[x]){S.exps=S.exps.filter(function(z){return String(z.id)!==x});delete ar[x];sv();tb();dash();$("det").innerHTML=""}else{ar[x]=1;b.textContent="¿Seguro?";setTimeout(function(){delete ar[x];if(b.isConnected)b.textContent="Eliminar"},3000)}}};
+$("csv").onclick=function(){var H=["codigo","nombre","fecha","inicio","fin","volumen_inicial_ml","volumen_filtrado_ml","tiempo_min","caudal_ml_min","recuperacion_pct","no_recuperado_ml","tipo_agua","apariencia_inicial","apariencia_final","turbidez_inicial_ntu","turbidez_final_ntu","eliminacion_turbidez_pct","estado_filtro","observaciones","tipo"],q=function(v){return'"'+String(v).replace(/"/g,'""')+'"'};
+ var t=[H.join(",")].concat(srt().map(function(x){return[x.cod,x.nom,x.fec,x.hi,x.hf,x.ini,x.fil,x.mn,isNaN(ca(x))?"":ca(x).toFixed(2),rc(x).toFixed(2),x.ini-x.fil,x.tp,x.ai,x.af,x.ni,x.nf,isNaN(tu(x))?"":tu(x).toFixed(2),x.ef,x.obs,x.demo?"demostración":"real"].map(q).join(",")})).join("\n");
+ $("csvbox").innerHTML='<p style="font-size:.85rem;color:var(--mu);margin-top:10px">Copia este contenido y pégalo en Excel o en un archivo .csv.</p><textarea id="cta" readonly></textarea><button id="cc">Copiar CSV</button>';$("cta").value=t;$("cta").select();
+ $("cc").onclick=function(){try{navigator.clipboard.writeText(t).then(function(){$("cc").textContent="Copiado ✓"},function(){$("cta").select()})}catch(e){$("cta").select()}}};
+/* estadísticas */
+var off={};
+function bars(s,fns,cols,names,line){var n=s.length,k=fns.length,gw=k*20+22,W=Math.max(320,n*gw+60),H=210,pt=18,pb=38,ch=H-pt-pb,mx=0,g="",pts=[],i;
+ s.forEach(function(t){fns.forEach(function(f){var v=f(t);if(!isNaN(v))mx=Math.max(mx,v)})});mx=mx||1;var st=Math.pow(10,Math.floor(Math.log10(mx)));mx=Math.ceil(mx/st*1.05*2)/2*st;
+ for(i=0;i<=4;i++){var y=pt+ch-ch*i/4;g+='<line x1="44" x2="'+W+'" y1="'+y+'" y2="'+y+'" stroke="var(--bd)"/><text x="40" y="'+(y+4)+'" text-anchor="end">'+f1(mx*i/4)+"</text>"}
+ s.forEach(function(t,a){var x0=50+a*((W-50)/n)+((W-50)/n-k*20)/2;fns.forEach(function(f,b){var v=f(t);if(isNaN(v))return;var h=ch*v/mx,x=x0+b*20,y=pt+ch-h;g+='<rect x="'+x+'" y="'+y+'" width="17" height="'+h+'" rx="3" fill="'+cols[b]+'"><title>'+esc(t.cod)+" · "+names[b]+": "+f1(v)+"</title></rect>"+(k===1?'<text x="'+(x+8)+'" y="'+(y-4)+'" text-anchor="middle" style="fill:var(--tx);font-weight:600">'+f1(v)+"</text>":"");if(b===0)pts.push([x+8,y])});
+ g+='<text x="'+(x0+k*10)+'" y="'+(H-pb+15)+'" text-anchor="middle">'+esc(t.cod.slice(0,8))+'</text><text x="'+(x0+k*10)+'" y="'+(H-pb+28)+'" text-anchor="middle">'+fd(t.fec).slice(0,5)+"</text>"});
+ if(line&&pts.length>1)g+='<polyline points="'+pts.map(function(p){return p.join(",")}).join(" ")+'" fill="none" stroke="var(--gr)" stroke-width="2" stroke-dasharray="4 3"/>';
+ return'<div class="sc"><svg width="'+W+'" height="'+H+'" viewBox="0 0 '+W+" "+H+'" style="max-width:none" role="img">'+g+"</svg></div>"+(k>1?'<div class="row" style="font-size:.8rem">'+names.map(function(m,i){return'<span><b style="color:'+cols[i]+'">■</b> '+m+"</span>"}).join("")+"</div>":"")}
+function ana(){var a=$("e1").value,b=$("e2").value,all=srt().filter(function(t){return(!a||t.fec>=a)&&(!b||t.fec<=b)});
+ $("chips").innerHTML=all.map(function(t){return'<label style="flex-direction:row;align-items:center;gap:4px"><input type="checkbox" data-o="'+t.id+'"'+(off[t.id]?"":" checked")+">"+esc(t.cod)+"</label>"}).join("");
+ var s=all.filter(function(t){return !off[t.id]});if(!s.length){$("an").innerHTML='<div class="cd">No hay experimentos para mostrar. Registra uno o ajusta los filtros.</div>';return}
+ var mv=s.reduce(function(x,y){return y.fil>x.fil?y:x}),mt=s.reduce(function(x,y){return y.mn<x.mn?y:x}),mc=s.reduce(function(x,y){return ca(y)>ca(x)?y:x});
+ var tw=s.filter(function(t){return num(t.ni)>=0&&num(t.nf)>=0&&t.ni!==""&&t.nf!==""});
+ $("an").innerHTML='<div class="gr"><div class="k"><b>'+f1(mv.fil)+' ml</b><span>Mayor volumen filtrado ('+esc(mv.cod)+')</span></div><div class="k"><b>'+f1(mt.mn)+' min</b><span>Menor tiempo ('+esc(mt.cod)+')</span></div><div class="k"><b>'+fx(ca(mc)," ml/min")+'</b><span>Mayor caudal ('+esc(mc.cod)+')</span></div><div class="k"><b>'+fx(av(s,rc),"%")+"</b><span>Promedio de recuperación</span></div></div>"+
+ '<div class="nt">Un mayor caudal no significa mejor calidad del agua, y la recuperación mide volumen, no eliminación de contaminantes.</div>'+
+ [["Volumen inicial frente a filtrado (ml)",[function(t){return t.ini},function(t){return t.fil}],["#0b5d93","#12b5c1"],["Inicial","Filtrado"]],["Tiempo de filtración por experimento (min)",[function(t){return t.mn}],["#f0a500"],["min"]],["Caudal de filtración (ml/min)",[ca],["#7a5cc9"],["ml/min"]],["Porcentaje de recuperación (%)",[rc],["#2e9e5b"],["%"]],["Evolución del caudal entre pruebas",[ca],["#12b5c1"],["ml/min"],1]].map(function(c){return'<div class="cd"><h2>'+c[0]+"</h2>"+bars(s,c[1],c[2],c[3],c[4])+"</div>"}).join("")+
+ '<div class="cd"><h2>Turbidez inicial y final (NTU)</h2>'+(tw.length?bars(tw,[function(t){return num(t.ni)},function(t){return num(t.nf)}],["#b08a5a","#12b5c1"],["Inicial","Final"]):'<p style="color:var(--mu);margin:0">Sin mediciones de turbidez. Si dispones de un turbidímetro, registra los NTU en cada experimento; no se estiman a partir del color del agua.</p>')+"</div>"}
+$("chips").onchange=function(e){var o=e.target.getAttribute("data-o");if(o){if(e.target.checked)delete off[o];else off[o]=1;ana()}};$("e1").onchange=ana;$("e2").onchange=ana;
+/* materiales, educación, protocolo, seguridad */
+$("mts").innerHTML=MT.map(function(m){return'<div class="cd" style="margin:0"><div class="sw" style="background:'+m[2]+'">'+m[1]+"</div><h3>"+m[0]+"</h3><p><b>Función:</b> "+m[3]+"</p><p style='margin:0;color:var(--mu);font-size:.85rem'><b>Recomendaciones:</b> "+m[4]+"</p></div>"}).join("");
+$("rec").innerHTML=[["♻️ Reutilizables","Botella plástica, tela, recipiente recolector."],["🌿 Naturales","Piedras y arena."],["🧪 Filtrantes","Piedras, arena gruesa, carbón activado, arena fina, telas."],["📏 Instrumentos de medición","Recipiente graduado, cronómetro, turbidímetro (opcional)."],["💻 Tecnológicos","EcoAgua Monitor: registro, cálculos y gráficos."]].map(function(x){return'<div><b>'+x[0]+"</b><br><span style='color:var(--mu);font-size:.88rem'>"+x[1]+"</span></div>"}).join("");
+var ED=[["¿Qué es la filtración del agua?","Es separar partículas sólidas del agua haciéndola pasar por materiales porosos."],["¿Cómo funciona un filtro casero?","El agua baja por gravedad a través de capas de materiales; cada una retiene partículas de distinto tamaño."],["¿Qué son las partículas suspendidas?","Pequeñas partículas (tierra, arcilla, restos orgánicos) que flotan en el agua y la vuelven turbia."],["Filtración vs. desinfección","Filtrar retira partículas; desinfectar elimina o inactiva microorganismos. Son procesos distintos: un filtro casero no garantiza desinfección."],["¿Qué función cumple cada material?","Piedras: residuos grandes. Arena gruesa y fina: partículas de menor tamaño. Carbón activado: adsorción. Telas: contener materiales."],["¿Qué es la adsorción?","Es cuando ciertas sustancias se adhieren a la superficie porosa del carbón activado. Ayuda con algunos olores, sabores y compuestos orgánicos, pero no con todos los contaminantes."],["¿Por qué arena de distintos tamaños?","Primero se retienen partículas grandes y luego las más pequeñas, lo que reparte el trabajo entre capas y evita obstruir pronto una sola."],["¿Qué afecta el tiempo de filtración?","Cantidad de agua, granulometría, cantidad y compactación de materiales, altura de capas, obstrucción, partículas presentes, diseño de la salida y altura de agua sobre el filtro."],["Beneficios ambientales de reutilizar","Reduce residuos, aprovecha recursos disponibles y fomenta la educación ambiental."]];
+$("edu").innerHTML=ED.map(function(x){return"<details><summary>"+x[0]+"</summary><p style='margin:6px 0 0'>"+x[1]+"</p></details>"}).join("");
+$("ps").innerHTML=["Se vierte el agua turbia por la parte superior.","Las piedras retienen residuos grandes y reparten el flujo.","La arena gruesa retiene partículas suspendidas mayores.","El carbón activado, contenido en tela fina, adsorbe algunos compuestos.","La arena fina retiene partículas más pequeñas.","La tela de salida mantiene los materiales dentro del filtro.","El agua cae al recipiente inferior, donde se mide su volumen."].map(function(x){return"<li>"+x+"</li>"}).join("");
+var PR=["Limpiar y preparar la botella.","Preparar los materiales filtrantes.","Lavar las piedras y arenas hasta retirar residuos y polvo.","Preparar el carbón activado apropiado.","Colocar las capas en el orden correspondiente.","Colocar el recipiente recolector.","Medir el volumen inicial de agua.","Verter el agua lentamente.","Iniciar el cronómetro.","Observar el recorrido del agua.","Medir el volumen filtrado.","Detener el cronómetro al finalizar la medición.","Registrar los resultados.","Comparar los datos con experimentos anteriores."];
+function prUI(){var n=0;$("cks").innerHTML=PR.map(function(x,i){var c=S.ck[i];if(c)n++;return'<label class="cl" style="flex-direction:row;color:var(--tx);font-size:.92rem"><input type="checkbox" data-k="'+i+'"'+(c?" checked":"")+"><span><b>"+(i+1)+".</b> "+x+"</span></label>"}).join("");$("pbi").style.width=n/PR.length*100+"%";$("pbt").textContent=n+" de "+PR.length+" pasos completados"}
+$("cks").onchange=function(e){var k=e.target.getAttribute("data-k");if(k!==null){if(e.target.checked)S.ck[k]=1;else delete S.ck[k];sv();prUI()}};$("ckr").onclick=function(){S.ck={};sv();prUI()};
+$("sg").innerHTML=["El filtro casero no garantiza que el agua sea potable.","El agua transparente puede contener microorganismos y contaminantes disueltos.","Piedras y arenas ayudan a retener partículas, pero no garantizan eliminar bacterias o virus.","El carbón activado puede adsorber ciertos compuestos, pero no elimina todos los contaminantes.","La filtración no equivale a desinfección.","No beber el agua obtenida en la demostración.","Para consumo humano se requieren tratamientos adecuados y comprobaciones de calidad.","La filtración no es una solución universal para purificar agua contaminada."].map(function(x){return'<div class="cl"><span>⚠️</span><span>'+x+"</span></div>"}).join("");
+/* configuración */
+$("un").oninput=function(){S.un=$("un").value.trim();sv();dash()};
+$("rd").onclick=function(){S.exps=S.exps.filter(function(t){return !t.demo});sv();dash();tb();$("cm").textContent="Datos de demostración eliminados."};
+var rr=false;$("ra").onclick=function(){var b=$("ra");if(!rr){rr=true;b.textContent="¿Seguro? Toca otra vez";setTimeout(function(){rr=false;b.textContent="Borrar todos los datos"},3500);return}rr=false;b.textContent="Borrar todos los datos";S.exps=[];S.tm=R0();S.ck={};S.reg=false;sv();dash();tb();tmUI();tick();prUI();$("cm").textContent="Todos los datos fueron borrados."};
+ld();$("un").value=S.un||"";clr();tmUI();dash();simUI();prUI();tick();setInterval(tick,500);go(($("v-"+location.hash.slice(1))?location.hash.slice(1):S.view)||"inicio");
+</script></body></html>
